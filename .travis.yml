@@ -1,0 +1,17 @@
+sudo: required
+service:
+  - docker
+before_install:
+  - docker build -t rizwankhan0121/travis_test:v1.0 .
+script:
+  - echo "$docker_password" | docker login -u "$docker_username" --password-stdin
+  - docker images
+  - docker push rizwankhan0121/travis_test:v1.0
+notifications:
+  email:
+    recipients:
+      - rizwan.sairab@gmail.com
+    on_success: always
+    on_failure: always
+
+
